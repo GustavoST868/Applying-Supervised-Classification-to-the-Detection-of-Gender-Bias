@@ -8,7 +8,7 @@ This research revolves around the question of how different classification appro
 
 ## Repository structure
 
-The repository is divided into two folders. The `literature-review/` folder contains the `literature_review.xlsx` spreadsheet, where the protocol of the literature review is recorded, such as, for example, the research questions, the search string, the inclusion criteria and the selected studies. The `ml-project/` folder, on the other hand, contains the experiment, which is divided into `configs/`, which holds the single configuration of the experiment, the prompts of the judges and the definition of sexism used in the annotation, `scripts/`, which gathers the code of each stage, `data/` and `models/`, which receive the downloaded data and the trained models, and `results/`, which stores the tables, figures and predictions of each run.
+The repository is divided into two folders. The `literature-review` folder contains the `literature_review.xlsx` spreadsheet, where the protocol of the literature review is recorded, such as, for example, the research questions, the search string, the inclusion criteria and the selected studies. The `ml-project` folder, on the other hand, contains the experiment, which is divided into `configs`, which holds the single configuration of the experiment, the prompts of the judges and the definition of sexism used in the annotation, `scripts`, which gathers the code of each stage, `data` and `models`, which receive the downloaded data and the trained models, and `results`, which stores the tables, figures and predictions of each run.
 
 The scripts follow the phases of the experiment. The `pipeline.py` file coordinates the whole run, `preparation.py` handles the download, cleaning and splitting of the data, `classical.py` and `transformer.py` train the classifiers, `judges.py` queries the LLMs and `evaluation.py` applies the models to the test set, compares the methods and generates the report. In addition, the `common.py` file holds the code shared between the stages, such as the metrics, the lexicon and the hyperparameter search spaces.
 
@@ -39,7 +39,7 @@ All the parameters of the experiment are in the `configs/config.yaml` file, such
 
 ## Results
 
-The results of each run are stored in `ml-project/results/`, organized in a subfolder with the name of the run. The `metrics/` folder contains the CSV tables and the `SUMMARY.md` file, which gathers the main tables of each research question, the `figures/` folder contains the charts and the confusion matrices, `predictions/` keeps the predictions of each method on the test set and `runs/` holds the state of the run, such as the answers of the judges and the cost records.
+The results of each run are stored in `ml-project/results`, organized in a subfolder with the name of the run. The `metrics` folder contains the CSV tables and the `SUMMARY.md` file, which gathers the main tables of each research question, the `figures` folder contains the charts and the confusion matrices, `predictions` keeps the predictions of each method on the test set and `runs` holds the state of the run, such as the answers of the judges and the cost records.
 
 In the `main` run, DeBERTa-v3-base with the full text achieved the best result, with a macro F1 of 0.832 on the test set, followed by XGBoost, with 0.785. The consensus of the judges, on the other hand, reached a macro F1 of 0.638, below the supervised classifiers, but with an AUPRC of 0.724, close to that of the classical classifiers. In addition, it was observed that every classifier loses performance in the masked scenario, but the transformer kept the same AUC on the texts without lexicon terms, which indicates that it captures signals of sexism that go beyond offensive words. Figure 1 shows the macro F1 of each method on the test set.
 
@@ -47,6 +47,4 @@ In the `main` run, DeBERTa-v3-base with the full text achieved the best result, 
 
 Regarding the judges, the agreement between the three models was moderate, with a Krippendorff's alpha of 0.61, and Llama 3.1 was the only one that fell below 0.8 when the prompt was reworded. As for the cost, the judges took, on average, about 494 milliseconds per prediction in the consensus, while the transformer took 1.6 milliseconds and the classical classifiers less than 0.5 milliseconds. With this, it can be noted that, for this task, fine-tuning a supervised model proved to be more accurate and cheaper than using LLMs as judges.
 
-## Authorship and license
 
-This project was developed by Leticia Gonçalves Batista and Gustavo Santos Teixeira and is distributed under the MIT license, whose full text can be found in `ml-project/LICENSE`.
