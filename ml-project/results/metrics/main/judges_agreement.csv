@@ -1,0 +1,5 @@
+first,second,n,kappa,krippendorff_alpha,ci_low,ci_high
+judge_gemma4_12b,judge_qwen3.5_9b,3999,0.5743125788948842,,,
+judge_gemma4_12b,judge_llama3.1_latest,3999,0.6240091102808828,,,
+judge_qwen3.5_9b,judge_llama3.1_latest,4000,0.6259004668514835,,,
+panel,panel,4000,,0.6066746676461943,0.5875254671343176,0.6240929134739807

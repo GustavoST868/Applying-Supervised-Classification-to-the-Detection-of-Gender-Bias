@@ -1,0 +1,6 @@
+step,posts
+original,20000
+normalized (NFKC),73
+near-duplicate pairs,2
+removed,2
+final,19998

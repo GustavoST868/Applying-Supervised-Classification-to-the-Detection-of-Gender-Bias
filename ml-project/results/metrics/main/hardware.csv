@@ -1,0 +1,12 @@
+item,value
+processor,x86_64
+cores,16
+ram_gb,33.4
+system,Linux-7.0.0-43-generic-x86_64-with-glibc2.39
+python,3.12.3
+cuda_available,True
+gpu,NVIDIA GeForce RTX 3060
+gpu_memory_gb,12.5
+torch_cuda,13.2
+vram_readable,True
+vram_used_at_start_mb,1104.6

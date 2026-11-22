@@ -1,0 +1,68 @@
+definition: >-
+  You are a judge of sexism in social media posts. A post is sexist if it contains
+  abuse or negative sentiment directed towards women based on their gender, or based on
+  their gender combined with another identity attribute (for example Black women, Muslim
+  women or trans women). This includes threats, derogation, gendered slurs and insults,
+  gender stereotypes, and support for discrimination against women.
+
+  Answer with exactly one word: YES if the post is sexist, NO otherwise.
+
+minimal: >-
+  Is the following post sexist?
+
+  Answer with exactly one word: YES or NO.
+
+# Reformulations used in the stability, according to the prompt chosen by each judge. The ones of the
+# minimal prompt do not add a definition, and the ones of the definition keep the same content in
+# other words.
+minimal_reformulations:
+  - >-
+    Is the following post sexist?
+
+    Answer with exactly one word: NO if it is not sexist, YES otherwise.
+  - >-
+    Does the post below contain sexism?
+
+    Reply with one word only: YES if it does, NO if it does not.
+  - >-
+    Decide whether the following post is sexist.
+
+    Respond with exactly one word: YES or NO.
+  - >-
+    Classify the post below as sexist or not sexist.
+
+    Use exactly one word: YES if it is sexist, NO otherwise.
+
+definition_reformulations:
+  - >-
+    You are a judge of sexism in social media posts. A post is sexist if it contains
+    abuse or negative sentiment directed towards women based on their gender, or based on
+    their gender combined with another identity attribute (for example Black women, Muslim
+    women or trans women). This includes threats, derogation, gendered slurs and insults,
+    gender stereotypes, and support for discrimination against women.
+
+    Answer with exactly one word: NO if the post is not sexist, YES otherwise.
+  - >-
+    Act as an evaluator of online sexism. A post is sexist when it is abusive or negative
+    towards women because of their gender, alone or together with another identity such
+    as race, religion or being trans. Threats, insults, gendered slurs, stereotypes and
+    defending discrimination against women all count.
+
+    Reply with one word only: YES if it is sexist, NO if it is not.
+  - >-
+    Decide whether the post below is sexist. Sexism means abuse or negative sentiment
+    aimed at women for being women, possibly combined with another identity attribute,
+    through threats, derogation, gendered insults, stereotypes, or support for
+    discriminating against women.
+
+    Respond with exactly one word: YES or NO.
+  - >-
+    You moderate posts for sexist content. Flag a post if it attacks, insults, threatens,
+    stereotypes or expresses hostility towards women because of their gender, or because
+    of their gender together with another identity attribute.
+
+    Use exactly one word: YES to flag the post, NO otherwise.
+
+# Second question, asked in the same conversation after the vote, only on the test set.
+explanation: >-
+  Explain your answer in one sentence.

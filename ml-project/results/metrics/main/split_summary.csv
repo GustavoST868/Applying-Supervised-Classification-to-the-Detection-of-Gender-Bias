@@ -1,0 +1,4 @@
+split,posts,sexist,sexist_proportion
+dev,1999,486.0,0.24312156078039018
+test,4000,,
+train,13999,3398.0,0.24273162368740625

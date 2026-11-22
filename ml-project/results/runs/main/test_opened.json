@@ -1,0 +1,12 @@
+{
+  "classic_naive_bayes_full.joblib": "95bfd644583fffff0c6d0854e60089b0079537db861ddec8fcc60efa9afe90da",
+  "classic_naive_bayes_masked.joblib": "59811944f31edd552e4595477ca2e2db26d197665fbaf1b22e5218fc200ffecf",
+  "classic_logistic_regression_full.joblib": "b9d9ba075721cb8bdc95603683b1d40c0310cf78a638bc8b74d7749ccf999818",
+  "classic_logistic_regression_masked.joblib": "713d534104f22fddf31ddd0db7d58571176a4e62a0e9b0a5fd57f22ff13331d4",
+  "classic_linear_svm_full.joblib": "fddd69527f058e86ce401ca3d9e81b24efc6312a3fad8e3f1b0157169ac08568",
+  "classic_linear_svm_masked.joblib": "9a1abb6b415d7904a9f7d9ecb9aef95b6bcaf2d26bd7399846c0cb1f0c582c88",
+  "classic_xgboost_full.joblib": "842b848646b37f4636489ce14f65910c24815455e199c33ae8ce6976762ce608",
+  "classic_xgboost_masked.joblib": "f1ff00aa8234cf8aa9320ba09e10f358eb440528d87ca76a9d1e4ef9ce619c2d",
+  "transformer_full": "f1e6375ed3cf8dade74e9b1ad761fa88d7082091a7dd0b9bd57516e9911c2377",
+  "transformer_masked": "8b058b37b0e58c3f6c516b31fa0fe40a197dff1ecc3407d4eed86a7147f0bfbb"
+}

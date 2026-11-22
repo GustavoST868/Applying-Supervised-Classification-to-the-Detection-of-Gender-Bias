@@ -1,0 +1,205 @@
+# Single configuration of the experiment. Each block has a `references` field with the keys from
+# the Artigo/referencias.bib file that support the choices of the block; the `report` stage saves
+# these keys, next to the values used, in results/metrics/<run>/traceability.csv.
+
+seed: 42
+
+data:
+  # EDOS, SemEval-2023 Task 10, pinned to a commit. The official split (14,000 train, 2,000
+  # development, 4,000 test) is kept so that the result is comparable to the one of the task.
+  base_url: https://raw.githubusercontent.com/rewire-online/edos/b1f1fbcca9d42de0395432ada8fcfb5c35f68c77/data/edos_labelled_aggregated.csv
+  raw_dataset: data/raw/dataset.csv
+  processed: data/processed
+  references: [kirk2023, yuan2023transfer, hemati2023sutnlp, pan2024comparing]
+
+lexicon:
+  # English HurtLex 1.2, conservative level of the categories of female genitalia (asf) and
+  # prostitution (pr), the categories linked to women used in misogyny detection.
+  url: https://raw.githubusercontent.com/valeriobasile/hurtlex/d4d5cf1199c09868486f978fcea58af0e8936a1e/lexica/EN/1.2/hurtlex_EN.tsv
+  raw: data/raw/hurtlex_EN.tsv
+  categories: [asf, pr]
+  level: conservative
+  # Lemmas and words of the text are compared by their Porter stem.
+  stemmer: porter
+  # Lexicon rule: the post is sexist when it has at least one term.
+  rule_threshold: 1
+  references: [bassignana2018, pamungkas2020, porter1980, davidson2017]
+
+cleaning:
+  # NFKC Unicode normalization. EDOS already comes with anonymized users and links ([USER], [URL]).
+  unicode_normalization: NFKC
+  # Near duplicates: MinHash over word 5-grams, with a signature of 9,000 functions in 450
+  # bands of 20, and confirmation by the exact Jaccard index above 0.8.
+  shingle_words: 5
+  minhash_permutations: 9000
+  minhash_bands: 450
+  minhash_rows: 20
+  min_jaccard: 0.8
+  references: [unicode15, broder1997, lee2022, kapoor2023]
+
+mask:
+  # Masked scenario: the lexicon terms are removed from every text (train,
+  # development and test), with no marker in their place.
+  references: [kennedy2020, ramponi2022, geirhos2020]
+
+validation:
+  # Stratified 5-fold cross-validation on the development set.
+  folds: 5
+  references: [bischl2023, pedregosa2011]
+
+optimization:
+  # Search with the multivariate TPE of Optuna. 60 trials per algorithm and scenario: by the
+  # expression 1 - (1 - v/V)^T, 60 draws reach a region with 5% of the space with more than 95%
+  # chance; TPE starts with 10 random trials and then focuses the search on the promising regions.
+  trials: 60
+  random_startup_trials: 10
+  multivariate: true
+  # Metric of the search: AUPRC (average precision), suited to imbalanced classes.
+  metric: average_precision
+  # Pruning by the median rule in the algorithms with the most expensive fit: after each fold, the
+  # trial stops if the partial mean of the AUPRC is below the median of the previous trials at the
+  # same fold. The first trials (the random ones of TPE) run whole. In the other algorithms,
+  # the folds run in parallel and without pruning.
+  pruning:
+    algorithms: [xgboost]
+    unpruned_trials: 10
+  references: [bergstra2011, bergstra2012, akiba2019, watanabe2023, thornton2013, saito2015, golovin2017]
+
+threshold:
+  # The decision threshold of each classical classifier maximizes the mean macro F1, the official
+  # EDOS metric, over the folds of the cross-validation on the development set, in a grid of
+  # thresholds (TunedThresholdClassifierCV of scikit-learn). In the transformer, the threshold
+  # maximizes the macro F1 among the scores observed on validation.
+  metric: f1_macro
+  grid_points: 100
+  references: [lipton2014, kirk2023, pedregosa2011]
+
+representation:
+  # TF-IDF with L2 normalization. The kind of n-gram, the document frequency cut and the sublinear
+  # tf go into the search together with the hyperparameters of the model (CASH problem).
+  space:
+    ngrams:
+      type: categorical
+      values: [word_1_1, word_1_2, char_1_4, char_1_5]
+    min_df:
+      type: integer
+      min: 1
+      max: 5
+    sublinear_tf:
+      type: categorical
+      values: [true, false]
+  references: [salton1988, rennie2003, wang2012, waseem2016, mehdad2016, yang1997, thornton2013]
+
+classical:
+  naive_bayes:
+    # Complement Naive Bayes: alpha smoothing on a logarithmic scale, among the values tested
+    # by the authors (from 1e-4 to Laplace smoothing).
+    space:
+      alpha: {type: real_log, min: 0.0001, max: 1.0}
+    references: [rennie2003, bischl2023]
+  logistic_regression:
+    # C from 2^-10 to 2^10 on a logarithmic scale; class weights as an option of the search.
+    space:
+      C: {type: real_log, min: 0.0009765625, max: 1024}
+      class_weight: {type: categorical, values: [none, balanced]}
+    references: [probst2019, bischl2023, king2001, fan2008]
+  linear_svm:
+    space:
+      C: {type: real_log, min: 0.0009765625, max: 1024}
+      class_weight: {type: categorical, values: [none, balanced]}
+    references: [joachims1998, probst2019, bischl2023, king2001, fan2008]
+  xgboost:
+    # Tuning ranges (5% and 95% quantiles) of Table 3 of Probst et al. (2019); the logarithmic
+    # scale follows the 2^x transformation of Table 1 of the same paper. Before XGBoost, the
+    # chi-squared selection keeps from 2% to 10% of the n-grams.
+    space:
+      selection_percentile: {type: real_log, min: 2, max: 10}
+      n_estimators: {type: integer, min: 921, max: 4550}
+      learning_rate: {type: real_log, min: 0.002, max: 0.355}
+      subsample: {type: real, min: 0.545, max: 0.958}
+      max_depth: {type: integer, min: 6, max: 14}
+      min_child_weight: {type: real_log, min: 1.295, max: 6.984}
+      colsample_bytree: {type: real, min: 0.419, max: 0.864}
+      colsample_bylevel: {type: real, min: 0.335, max: 0.886}
+      reg_lambda: {type: real_log, min: 0.008, max: 29.755}
+      reg_alpha: {type: real_log, min: 0.002, max: 6.105}
+    references: [chen2016, probst2019, yang1997, dobrojevic2024cyberbullying]
+
+transformer:
+  # DeBERTa-v3-base, the best EDOS baseline. Exhaustive search over the grid of learning rates
+  # of He et al. (2023, Table 11) and over the batch sizes common to that table and to Devlin et al.
+  # (2019). Training for up to 4 epochs, evaluation after each epoch and choice of the best epoch on
+  # the official development set. Linear warmup over 10% of the steps and linear decay. The base
+  # model is downloaded from Hugging Face at the revision (commit) below.
+  model: microsoft/deberta-v3-base
+  revision: 8ccc9b6f36199bec6961081d44eb72fb3f7353f3
+  grid:
+    learning_rate: [1.5e-5, 2.0e-5, 2.5e-5, 3.0e-5]
+    batch_size: [16, 32]
+  epochs: 4
+  warmup: 0.1
+  weight_decay: 0.01
+  adam_epsilon: 1.0e-6
+  adam_beta2: 0.999
+  max_grad_norm: 1.0
+  # The best configuration is trained again with five seeds; the one with the highest AUPRC on the
+  # development set stays, and the variation among the seeds is reported.
+  seeds: [42, 43, 44, 45, 46]
+  references: [kirk2023, he2023, devlin2019, mosbach2021, dodge2020, loshchilov2019, wolf2020, pan2024comparing]
+
+judges:
+  # Panel of three open models from different families; consensus by the majority of the votes.
+  models: [gemma4:12b, qwen3.5:9b, llama3.1:latest]
+  temperature: 0
+  seed: 42
+  num_ctx: 4096
+  num_predict: 3
+  top_logprobs: 20
+  keep_alive: 5m
+  # Three prompts (minimal, EDOS definition and definition with examples) compared by AUPRC on
+  # a sample of the development set; the size 385 estimates a proportion with a 5% margin and 95%
+  # confidence. Two examples of each class in the prompt with examples.
+  dev_sample: 385
+  examples_per_class: 2
+  # Stability: the same sample with the chosen prompt and its four reformulations
+  # (prompts.yaml). The sample is also judged with three seeds, but, with zero temperature, the
+  # decoding is greedy, and this repetition only checks if the judge is deterministic.
+  stability_seeds: [42, 43, 44]
+  min_alpha: 0.8
+  # Explanation: on the test, after the vote, the judge explains the vote in one sentence (question
+  # `explanation` in prompts.yaml). The vote comes first and does not change; the explanation is
+  # conditioned on it and only serves the qualitative analysis, with no guarantee of faithfulness to
+  # the real reason of the vote.
+  num_predict_explanation: 80
+  references: [verga2024, gilardi2023, smith2024rmit, park2026benchmark, pan2024comparing, wen2025automate, zheng2023, liu2023geval, perez2021, brown2020, cochran1977, krippendorff2004, haldar2025, bhat2026, ollama, camburu2018, marasovic2022, turpin2023, wang2023explicacoes]
+
+evaluation:
+  # 95% confidence intervals by percentile bootstrap with 1,000 resamples. Pairs of
+  # methods compared by the McNemar test, with Holm correction for multiple comparisons.
+  bootstrap: 1000
+  alpha: 0.05
+  references: [efron1993, dietterich1998, mcnemar1947, holm1979, chicco2020, saito2015, borkan2019, cohen1960]
+
+interpretation:
+  # Most influential features of the best classical classifier by the SHAP values (importance =
+  # mean of |SHAP| over 2,000 posts of the development set) and local explanations (LIME) of three
+  # cases of each type (true positive, false positive and false negative). For the judges, the
+  # explanations of the three side by side on the same types of case of the consensus and on cases
+  # in which the judges disagree. A feature counts as a lexicon term when most of its
+  # occurrences in the development set are inside a lexicon term, since the character n-grams
+  # are rarely whole terms. In the linear SVM, which does not estimate probability, LIME
+  # receives the logistic function of the score.
+  terms: 50
+  shap_sample: 2000
+  lexicon_fraction_threshold: 0.5
+  cases_per_type: 3
+  lime_samples: 5000
+  lime_words: 10
+  references: [lundberg2017, lundberg2020, rennie2003, ribeiro2016, wang2023explicacoes]
+
+cost:
+  # Wall clock time and mean VRAM, read through NVML every 0.1 s. The VRAM of a method only adds
+  # its own processes (the stage process and, for the judges, the Ollama ones); the VRAM of the
+  # whole card, which includes other programs, is also recorded.
+  sampling_period_s: 0.1
+  references: [samsi2023]

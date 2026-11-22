@@ -1,0 +1,101 @@
+model,scenario,feature,shap_importance,direction,lexicon_fraction,lexicon_term
+classic_xgboost_full,full,wom,0.22597455263137817,sexist,0.00019778481012658228,False
+classic_xgboost_full,full,bitch,0.1608292124271393,sexist,0.9864864864864865,True
+classic_xgboost_full,full,fem,0.13072776103019715,sexist,0.0,False
+classic_xgboost_full,full,men ,0.13001175904273987,sexist,0.0,False
+classic_xgboost_full,full,?,0.07261626213788987,not_sexist,0.0,False
+classic_xgboost_full,full, whor,0.0687993220090866,sexist,0.978448275862069,True
+classic_xgboost_full,full,puss,0.06850555735826493,sexist,0.9324894514767933,True
+classic_xgboost_full,full,itch,0.06708590418100357,sexist,0.79890560875513,True
+classic_xgboost_full,full,bitc,0.06602737027406692,sexist,0.9815126050420168,True
+classic_xgboost_full,full,whor,0.06284143072366714,sexist,0.967479674796748,True
+classic_xgboost_full,full, bitc,0.05824197649955749,sexist,0.993006993006993,True
+classic_xgboost_full,full,.,0.05785971546173096,sexist,0.0,False
+classic_xgboost_full,full,cun,0.055754911482334135,sexist,0.9425837320574163,True
+classic_xgboost_full,full,omen ,0.050873098850250244,sexist,0.0,False
+classic_xgboost_full,full, wom,0.0430807284116745,sexist,0.00020678246484698098,False
+classic_xgboost_full,full,men,0.042848631620407106,sexist,0.0,False
+classic_xgboost_full,full,[,0.04154061126708984,not_sexist,0.0,False
+classic_xgboost_full,full,slut,0.04114326220750809,sexist,0.953757225433526,True
+classic_xgboost_full,full,women,0.041117180466651915,sexist,0.0,False
+classic_xgboost_full,full, fem,0.04040144193172455,sexist,0.0,False
+classic_xgboost_full,full,thot,0.03880260360240936,sexist,0.0,False
+classic_xgboost_full,full,sa,0.038072496950626374,not_sexist,0.00030413625304136254,False
+classic_xgboost_full,full, w,0.03746248978376389,sexist,0.008672699849170438,False
+classic_xgboost_full,full, cun,0.03592247846722603,sexist,0.9603960396039604,True
+classic_xgboost_full,full,b,0.032773669660091403,sexist,0.03837065376392483,False
+classic_xgboost_full,full, a ,0.032168033480644224,sexist,0.0,False
+classic_xgboost_full,full, th,0.031109898030757904,not_sexist,0.0,False
+classic_xgboost_full,full, ma,0.02955159068107605,sexist,0.0051776888679689334,False
+classic_xgboost_full,full,as ,0.029336320102214812,not_sexist,0.00046959380136182204,False
+classic_xgboost_full,full,en,0.029243047058582307,not_sexist,0.00017691808692575338,False
+classic_xgboost_full,full, puss,0.028404567539691925,sexist,0.9555555555555556,True
+classic_xgboost_full,full,en ,0.028341441988945008,sexist,0.0,False
+classic_xgboost_full,full,y ,0.028043983101844788,not_sexist,0.011700035301830652,False
+classic_xgboost_full,full, ho,0.02742342686653137,sexist,0.03815261044176707,False
+classic_xgboost_full,full,itc,0.0273256873190403,sexist,0.7870619946091644,True
+classic_xgboost_full,full, pe,0.0272987459897995,not_sexist,0.0,False
+classic_xgboost_full,full,i ,0.02618226879835129,not_sexist,0.0,False
+classic_xgboost_full,full,en ar,0.025512961477041244,sexist,0.0,False
+classic_xgboost_full,full,wome,0.024490506827831268,sexist,0.0,False
+classic_xgboost_full,full,s a,0.02367600378394127,sexist,0.015823817292006524,False
+classic_xgboost_full,full, a,0.022754893958568573,not_sexist,0.0,False
+classic_xgboost_full,full,[u,0.02252110826969147,not_sexist,0.0,False
+classic_xgboost_full,full,wo,0.022073042690753938,sexist,0.00011779950524207798,False
+classic_xgboost_full,full,i',0.021988070845603943,not_sexist,0.0,False
+classic_xgboost_full,full,es,0.021870047003030777,sexist,0.022183489145935667,False
+classic_xgboost_full,full,m,0.021699125558137893,not_sexist,0.004704054549770192,False
+classic_xgboost_full,full,ho,0.02152735447883606,sexist,0.04057480980557904,False
+classic_xgboost_full,full,th,0.021062073469161988,not_sexist,0.00021192614373890698,False
+classic_xgboost_full,full,re,0.020666632413864135,not_sexist,0.020356363267170923,False
+classic_xgboost_full,full,whore,0.02063746580481529,sexist,0.9833333333333333,True
+classic_xgboost_masked,masked,wom,0.11327142930030823,sexist,0.0,False
+classic_xgboost_masked,masked, .,0.10159156429767609,sexist,0.0,False
+classic_xgboost_masked,masked,men ,0.08023011493682862,sexist,0.0,False
+classic_xgboost_masked,masked,he,0.06864699220657348,sexist,0.0,False
+classic_xgboost_masked,masked,fem,0.06621130520105362,sexist,0.0,False
+classic_xgboost_masked,masked,?,0.04971422833204269,not_sexist,0.0,False
+classic_xgboost_masked,masked,omen ,0.04965833073854446,sexist,0.0,False
+classic_xgboost_masked,masked, a ,0.048733352720737456,sexist,0.0,False
+classic_xgboost_masked,masked, wom,0.037632381737232205,sexist,0.0,False
+classic_xgboost_masked,masked,[,0.03745034927129746,not_sexist,0.0,False
+classic_xgboost_masked,masked, fem,0.03550356477499008,sexist,0.0,False
+classic_xgboost_masked,masked,women,0.026491635859012604,sexist,0.0,False
+classic_xgboost_masked,masked,h,0.02581075358390808,not_sexist,0.0,False
+classic_xgboost_masked,masked,thot,0.025344194203615188,sexist,0.0,False
+classic_xgboost_masked,masked,[u,0.02284214839339256,not_sexist,0.0,False
+classic_xgboost_masked,masked,],0.02280468925833702,not_sexist,0.0,False
+classic_xgboost_masked,masked,as ,0.02133720016479492,not_sexist,0.0,False
+classic_xgboost_masked,masked,.,0.021148376166820526,sexist,0.0,False
+classic_xgboost_masked,masked,sa,0.01858037829399109,not_sexist,0.0,False
+classic_xgboost_masked,masked,wome,0.017996418118476867,sexist,0.0,False
+classic_xgboost_masked,masked,te,0.017512765616178514,not_sexist,0.0,False
+classic_xgboost_masked,masked,men,0.017122283846139907,sexist,0.0,False
+classic_xgboost_masked,masked," , ",0.016285627767443658,sexist,0.0,False
+classic_xgboost_masked,masked,i',0.01594383804500103,not_sexist,0.0,False
+classic_xgboost_masked,masked," ,",0.014774438738822938,sexist,0.0,False
+classic_xgboost_masked,masked,s a,0.014107195109128952,sexist,0.0,False
+classic_xgboost_masked,masked,i ,0.013694042772054672,not_sexist,0.0,False
+classic_xgboost_masked,masked,en ar,0.01362375409901142,sexist,0.0,False
+classic_xgboost_masked,masked,o ,0.013347574800252915,sexist,0.0,False
+classic_xgboost_masked,masked, [ur,0.013004393920302391,not_sexist,0.0,False
+classic_xgboost_masked,masked,omen,0.01289205688238144,sexist,0.0,False
+classic_xgboost_masked,masked, be,0.011803748115897178,sexist,0.0,False
+classic_xgboost_masked,masked,ers,0.011590458959341049,not_sexist,0.0,False
+classic_xgboost_masked,masked,chi,0.010652568936347962,not_sexist,0.0,False
+classic_xgboost_masked,masked,n,0.010598179712891578,sexist,0.0,False
+classic_xgboost_masked,masked,r li,0.010504140786826611,sexist,0.0,False
+classic_xgboost_masked,masked,ho,0.010442049115896225,sexist,0.0,False
+classic_xgboost_masked,masked, [url,0.010317693725228309,not_sexist,0.0,False
+classic_xgboost_masked,masked,i hav,0.010054385289549828,not_sexist,0.0,False
+classic_xgboost_masked,masked, is a,0.009773485839366913,sexist,0.0,False
+classic_xgboost_masked,masked, fa,0.009721359059214592,sexist,0.0,False
+classic_xgboost_masked,masked,ma,0.009719964742660523,sexist,0.0,False
+classic_xgboost_masked,masked,en,0.009224131122231484,not_sexist,0.0,False
+classic_xgboost_masked,masked, no ,0.009191595941781998,sexist,0.0,False
+classic_xgboost_masked,masked, ma,0.009170763418078423,sexist,0.0,False
+classic_xgboost_masked,masked,ike a,0.00883712700009346,sexist,0.0,False
+classic_xgboost_masked,masked,:,0.00874725241959095,not_sexist,0.0,False
+classic_xgboost_masked,masked,re,0.00870108911395073,not_sexist,0.0,False
+classic_xgboost_masked,masked,wo,0.008634071201086044,sexist,0.0,False
+classic_xgboost_masked,masked, [,0.008565225124359132,not_sexist,0.0,False

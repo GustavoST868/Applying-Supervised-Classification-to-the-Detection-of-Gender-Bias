@@ -1,0 +1,15 @@
+{
+  "retrieval_date": "2026-11-19",
+  "posts": 20000,
+  "sexist_in_train_and_validation": 3884,
+  "splits": {
+    "train": 14000,
+    "test": 4000,
+    "dev": 2000
+  },
+  "lexicon_lemmas": 266,
+  "sha256": {
+    "data/raw/dataset.csv": "607bdbb766e1803a28f0eb8fc21c14b6b9dfa20039f726ba6767438584b47f9b",
+    "data/raw/hurtlex_EN.tsv": "a734820a63c87994781d182692e6dc7ec262c402016971a7fa31946ced0d470c"
+  }
+}

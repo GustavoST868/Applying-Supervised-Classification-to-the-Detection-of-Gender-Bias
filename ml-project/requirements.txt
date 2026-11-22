@@ -1,0 +1,36 @@
+# Direct dependencies of the pipeline, with pinned versions. pipeline.py installs this file in the
+# .venv on the first run and whenever it changes.
+
+# Data and charts
+numpy==2.4.6
+pandas==3.0.6
+pyarrow==26.0.0
+PyYAML==6.0.3
+matplotlib==3.11.2
+psutil==7.2.2
+nvidia-ml-py==13.615.71
+
+# Cleaning and lexicon
+datasketch==2.0.0
+networkx==3.7
+nltk==3.10.4
+
+# Classical classifiers and hyperparameter optimization
+scikit-learn==1.9.1
+xgboost==3.4.1
+optuna==4.9.0
+joblib==1.6.0
+
+# Transformer (the PyTorch wheel on PyPI for Linux already ships CUDA)
+torch==2.15.0
+transformers==4.57.6
+accelerate==1.16.0
+sentencepiece==0.2.3
+protobuf==7.36.2
+
+# Statistics, agreement and interpretation
+scipy==1.18.1
+statsmodels==0.15.0
+krippendorff==0.9.0
+shap==0.54.1
+lime==0.2.0.1

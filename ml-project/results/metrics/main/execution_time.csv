@@ -1,0 +1,17 @@
+phase,stage,seconds
+Preprocessing,hardware,3.6
+Preprocessing,data,2.0
+Preprocessing,cleaning,48.1
+Preprocessing,lexicon,4.4
+Data preparation,split,2.0
+Data preparation,eda,3.0
+Experiments,classical,16082.9
+Experiments,transformer,7914.0
+Experiments,judges_dev,1756.6
+Evaluation,test,37.5
+Evaluation,judges_test,10894.1
+Evaluation,comparison,52.9
+Evaluation,interpretation,118.4
+Evaluation,cost,
+Evaluation,report,
+Total,(whole run),36919.5
